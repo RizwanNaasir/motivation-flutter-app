@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:motivation/components/drawer/profile.dart';
+import 'package:motivation/components/pages/profile.dart';
 import 'package:motivation/components/pages/best_qoutes.dart';
 import 'package:motivation/components/pages/my_favourite_qoutes.dart';
 import 'package:motivation/components/pages/my_home_page.dart';
