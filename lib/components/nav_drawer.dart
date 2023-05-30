@@ -26,9 +26,9 @@ class _NavDrawerState extends State<NavDrawer> {
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          UserAccountsDrawerHeader(
-            accountName: const Text('General Hux'),
-            accountEmail: const Text('spacehitler@stardestroyer.com'),
+          const UserAccountsDrawerHeader(
+            accountName: Text('General Hux'),
+            accountEmail: Text('spacehitler@stardestroyer.com'),
           ),
           ListTile(
             leading: const Icon(Icons.home),

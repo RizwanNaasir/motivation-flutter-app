@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'components/pages/my_home_page.dart';
 import 'components/routes/route_list.dart';
 import 'utils/auth.dart';
-import 'components/nav_drawer.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,22 +25,6 @@ class MyApp extends StatelessWidget {
       ),
       home: const MyHomePage(),
       routes: routes,
-    );
-  }
-}
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: const NavDrawer(),
-      appBar: AppBar(
-        title: const Text('My	Motivation'),
-      ),
-      body: const Center(
-        child: Text('Side Menu Tutorial'),
-      ),
     );
   }
 }
