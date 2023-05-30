@@ -4,7 +4,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:motivation/Models/daily_quotes.dart';
-import 'package:shimmer/shimmer.dart';
 
 import '../nav_drawer.dart';
 import '../widgets/card_list.dart';
@@ -20,7 +19,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MainState extends State<MyHomePage> {
   final grey = Colors.blueGrey[800];
-  bool isLoading = false;
+  bool isLoading = true;
   List<DailyQuotes> dailyQuotes = [];
 
   @override
@@ -41,7 +40,9 @@ class _MainState extends State<MyHomePage> {
             dailyQuotes.add(DailyQuotes.fromJson(json[i]));
           });
         }
-        isLoading = false;
+        setState(() {
+          isLoading = false;
+        });
       } else {
         log('Error in loading data: ${value.statusCode}');
       }
@@ -51,6 +52,7 @@ class _MainState extends State<MyHomePage> {
   // Main build function
   @override
   Widget build(BuildContext context) {
+    log("Building Home Page $isLoading");
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home Page'),
@@ -62,57 +64,10 @@ class _MainState extends State<MyHomePage> {
           right: 10,
         ),
         child: Center(
-            child: isLoading
-                ? _buildLoadingShimmer() // Show shimmer effect while loading
-                : cardList(
-                    context, dailyQuotes, setState) // Show the list of quotes
+            child: cardList(context, dailyQuotes, setState,
+                isLoading) // Build the list of quotes
             ), // Show the list of quotes
       ),
     );
   }
-}
-
-Widget _buildLoadingShimmer() {
-  return ListView.builder(
-    itemCount: 5, // Number of shimmer placeholders to show
-    itemBuilder: (context, i) {
-      return Shimmer.fromColors(
-        baseColor: const Color(0xFF808080), // Color of the shimmer base color
-        highlightColor:
-            const Color(0xFFB0B0B0), // Color of the shimmer highlight
-        child: Container(
-          margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-          decoration: BoxDecoration(
-            color: Colors.black,
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(15.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                  height: 12, // Height of the shimmer placeholder
-                  width: double.infinity,
-                  color: Colors.white,
-                ),
-                const SizedBox(height: 10),
-                Container(
-                  height: 10, // Height of the shimmer placeholder
-                  width: 200, // Width of the shimmer placeholder
-                  color: Colors.white,
-                ),
-                const SizedBox(height: 10),
-                Container(
-                  height: 10, // Height of the shimmer placeholder
-                  width: 150, // Width of the shimmer placeholder
-                  color: Colors.white,
-                ),
-              ],
-            ),
-          ),
-        ),
-      );
-    },
-  );
 }
