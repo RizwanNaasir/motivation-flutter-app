@@ -52,7 +52,6 @@ class _MainState extends State<MyHomePage> {
   // Main build function
   @override
   Widget build(BuildContext context) {
-    log("Building Home Page $isLoading");
     return Scaffold(
       appBar: AppBar(
         title: const Text('Home Page'),
